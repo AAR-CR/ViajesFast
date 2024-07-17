@@ -1,0 +1,120 @@
+﻿@model List<ViajesFast.Models.FlightOffer>
+
+@{
+    ViewData["Title"] = "Flight Offers";
+    var airports = ViewBag.Airports as Dictionary<string, string>;
+}
+
+<div class="container mt-0">
+    <div class="form-horizontal">
+        <form asp-action="Index" method="get" class="bloque mx-auto">
+            <h2 class="text-center bloque text-warning container m-1">Busqueda de Ticketes</h2>
+
+            <div class="form-group row justify-content-center">
+                <label for="origin" class="col-sm-4 col-form-label text-warning">Origen</label>
+                <div class="col-sm-6">
+                    <select name="origin" class="form-control" required>
+                        @foreach (var airport in airports)
+                        {
+                            <option value="@airport.Value">@airport.Key</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <label for="destination" class="col-sm-4 col-form-label text-warning">Destino</label>
+                <div class="col-sm-6">
+                    <select name="destination" class="form-control" required>
+                        @foreach (var airport in airports)
+                        {
+                            <option value="@airport.Value">@airport.Key</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <label for="departureDate" class="col-sm-4 col-form-label text-warning">Fecha de salida</label>
+                <div class="col-sm-6">
+                    <input type="date" name="departureDate" class="form-control" placeholder="Fecha de Salida" required />
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <label for="adults" class="col-sm-4 col-form-label text-warning">Adultos</label>
+                <div class="col-sm-6">
+                    <input type="number" name="adults" class="form-control" placeholder="1" min="1" required />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-8 offset-sm-2 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary mb-2">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr />
+<div class="container mt-4">
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="row">
+            @foreach (var offer in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h3>Oferta de vuelo # @offer.Id</h3>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Total Price:</strong> @offer.Price.GrandTotal @offer.Price.Currency</p>
+                            <p><strong>Duration:</strong> @offer.Itineraries[0].Duration</p>
+                            <p><strong>Number of Bookable Seats:</strong> @offer.NumberOfBookableSeats</p>
+                            <p><strong>Last Ticketing Date:</strong> @offer.LastTicketingDate</p>
+                            <h4>Segments</h4>
+                            @foreach (var segment in offer.Itineraries[0].Segments)
+                            {
+                                <p><strong>Departure:</strong> @segment.Departure.IataCode @segment.Departure.At</p>
+                                <p><strong>Arrival:</strong> @segment.Arrival.IataCode @segment.Arrival.At</p>
+                                <p><strong>Carrier:</strong> @segment.CarrierCode</p>
+                                <p><strong>Aircraft:</strong> @segment.AircraftCode</p>
+                                <hr />
+                            }
+                            <form asp-action="Reserve" asp-controller="Amadeus" method="post">
+                                <input type="hidden" name="Id" value="@offer.Id" />
+                                <input type="hidden" name="PriceGrandTotal" value="@offer.Price.GrandTotal" />
+                                <input type="hidden" name="PriceCurrency" value="@offer.Price.Currency" />
+                                <input type="hidden" name="Duration" value="@offer.Itineraries[0].Duration" />
+                                <input type="hidden" name="NumberOfBookableSeats" value="@offer.NumberOfBookableSeats" />
+                                <input type="hidden" name="LastTicketingDate" value="@offer.LastTicketingDate" />
+                                <input type="hidden" name="Destination" value="@offer.Itineraries[0].Segments[0].Arrival.IataCode" />
+                                <input type="hidden" name="DepartureDate" value="@offer.Itineraries[0].Segments[0].Departure.At" />
+                                <input type="hidden" name="CarrierCode" value="@offer.Itineraries[0].Segments[0].CarrierCode" />
+                                <input type="hidden" name="AircraftCode" value="@offer.Itineraries[0].Segments[0].AircraftCode" />
+                                <button type="submit" class="btn btn-primary mb-2">Reservar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>No flight offers found.</p>
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Error</h4>
+            <p>@ViewBag.ErrorMessage</p>
+            <a href="@Url.Action("Index", "Amadeus")" class="btn btn-primary">Volver</a>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+

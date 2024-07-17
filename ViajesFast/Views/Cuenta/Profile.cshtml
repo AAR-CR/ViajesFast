@@ -1,0 +1,88 @@
+﻿@model ViajesFast.Models.Usuario
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+<form asp-action="Profile" method="post" class="bloque mx-auto">
+    <div class="form-horizontal">
+        <h2 class="text-center bloque text-white">Actualizar el Perfil de Usuario</h2>
+        <h4 class="text-center text-warning">Cambia la info necesaria acá:</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- Campo oculto para el ID del usuario -->
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group row justify-content-center">
+            <label asp-for="Nombre" class="col-sm-4 col-form-label text-warning text-right">Nombre</label>
+            <div class="col-sm-8">
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label asp-for="CorreoElectronico" class="col-sm-4 col-form-label text-warning text-right">Correo Electrónico</label>
+            <div class="col-sm-8">
+                <input asp-for="CorreoElectronico" class="form-control" />
+                <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label asp-for="Contraseña" class="col-sm-4 col-form-label text-warning text-right">Contraseña</label>
+            <div class="col-sm-8">
+                <input asp-for="Contraseña" class="form-control" />
+                <span asp-validation-for="Contraseña" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label asp-for="Telefono" class="col-sm-4 col-form-label text-warning text-right">Teléfono</label>
+            <div class="col-sm-8">
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label asp-for="Necesidad" class="col-sm-4 col-form-label text-warning text-right">Condición</label>
+            <div class="col-sm-8">
+                <select asp-for="Necesidad" class="form-control">
+                    <option value="">Seleccionar</option>
+                    @foreach (var necesidad in Enum.GetValues(typeof(ViajesFast.Models.Especial)))
+                    {
+                        <option value="@necesidad">@necesidad</option>
+                    }
+                </select>
+                <span asp-validation-for="Necesidad" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label asp-for="Boleto" class="col-sm-4 col-form-label text-warning text-right">Preferencia</label>
+            <div class="col-sm-8">
+                <select asp-for="Boleto" class="form-control">
+                    <option value="">Seleccionar</option>
+                    @foreach (var boleto in Enum.GetValues(typeof(ViajesFast.Models.Preferencia)))
+                    {
+                        <option value="@boleto">@boleto</option>
+                    }
+                </select>
+                <span asp-validation-for="Boleto" class="text-danger"></span>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="form-group text-center">
+            <button type="button" class="btn btn-secondary mr-2" onclick="window.location.href='@Url.Action("Index", "Home")'">Cancelar</button>
+            <button type="submit" class="btn btn-primary ml-2">Actualizar</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ViajesFast.Models.Vuelo>
+
+@{
+    ViewData["Title"] = "Vuelos Disponibles";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center text-warning ">Tickets de Vuelo ViajesFast</h1>
+    <div class="table-responsive mt-4">
+        <table class="table table-striped" id="vuelosTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Destino</th>
+                    <th>Fecha</th>
+                    <th>Número de Pasajeros</th>
+                    @* <th>Precio $</th> *@
+                    <th>Aerolínea</th>
+                </tr>
+            </thead>
+            <tbody class="tbody-dark">
+                @foreach (var vuelo in Model)
+                {
+                    <tr>
+                        <td>@vuelo.Destino</td>
+                        <td>@vuelo.Fecha.ToShortDateString()</td>
+                        <td>@vuelo.NumeroDePasajeros</td>
+                        @* <td>@vuelo.Precio</td> *@
+                        <td>@vuelo.Aerolinea</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

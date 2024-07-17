@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ViajesFast</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ViajesFast.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand text-warning" asp-area="" asp-controller="Home" asp-action="Index">ViajesFast</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Cuenta" asp-action="Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Cuenta" asp-action="Register">Registro</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Amadeus" asp-action="Index">Búsqueda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Vuelo" asp-action="Cart">Reserva</a>
+                        </li>
+                        @* <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Cuenta" asp-action="Register">Perfil</a>
+                        </li> *@
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Sobre Nosotros</a>
+                        </li>
+                        
+                    </ul>
+               
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item align-content-end">
+                                <span class="nav-link text-warning"> @User.Identity.Name</span>
+                            </li>
+                            <li class="nav-item align-content-end">
+                                <button type="button" class="btn btn-primary mx-1" style="cursor:pointer" onclick="location.href='@Url.Action("Profile", "Cuenta")'">Historial</button>
+                            </li>
+                            <li class="nav-item align-content-end">
+                                <button type="button" class="btn btn-success mx-2" style="cursor:pointer" onclick="location.href='@Url.Action("Profile", "Cuenta")'">Perfil</button>
+                            </li>
+                            <li class="nav-item align-content-end">
+                                <form id="logoutForm" asp-action="Logout" asp-controller="Cuenta" method="post" class="form-inline">
+                                    <button type="submit" class="btn btn-danger" style="cursor: pointer;">Salir</button>
+                                </form>
+                            </li>
+                    </ul>
+                    
+                }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - ViajesFast - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

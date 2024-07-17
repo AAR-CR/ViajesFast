@@ -1,0 +1,41 @@
+﻿@model List<ViajesFast.Models.Vuelo>
+
+@{
+    ViewData["Title"] = "Carrito de Compras";
+}
+
+<h2 class="text-center bloque text-white">Carrito de Compras</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Destino</th>
+                <th>Fecha</th>
+                <th>Número de Pasajeros</th>
+                <th>Precio</th>
+                <th>Aerolínea</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vuelo in Model)
+            {
+                <tr>
+                    <td>@vuelo.Destino</td>
+                    <td>@vuelo.Fecha.ToShortDateString()</td>
+                    <td>@vuelo.NumeroDePasajeros</td>
+                    <td>@vuelo.Precio</td>
+                    <td>@vuelo.Aerolinea</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <form asp-action="Checkout" method="post">
+        <button type="submit" class="btn btn-success">Finalizar Compra</button>
+    </form>
+}
+else
+{
+    <p>No hay vuelos en el carrito de compras.</p>
+}
