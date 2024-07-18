@@ -20,12 +20,15 @@ namespace ViajesFast.Controllers
         private readonly UsuarioService _usuarioService;
         private readonly ReservaService _reservaService;
         private readonly ILogger _logger;
-        public VueloController(VueloService vueloService, UsuarioService usuarioService, ReservaService reservaService, ILogger<VueloController> logger)
+        private readonly EmailService _emailService;
+
+        public VueloController(VueloService vueloService, UsuarioService usuarioService, ReservaService reservaService, ILogger<VueloController> logger, EmailService emailService)
         {
             _vueloService = vueloService;
             _usuarioService = usuarioService;
             _reservaService = reservaService;
             _logger = logger;
+            _emailService = emailService;
         }
 
 
@@ -66,6 +69,10 @@ namespace ViajesFast.Controllers
                 };
 
                 await _reservaService.CreateReservaAsync(reserva);
+                string subject = "Confirmación de Reserva";
+                string message = "<h1>Reserva Confirmada</h1><p>Gracias por reservar con nosotros.</p>";
+                await _emailService.SendEmailAsync(usuario.CorreoElectronico, subject, message);
+
             }
 
             // Vaciar el carrito después de la compra

@@ -23,14 +23,6 @@ namespace API_Vuelos.Controllers
             return _usuarioService.GetUsuarios();
         }
 
-        //[HttpGet]
-        //public ActionResult<List<Reserva>> GetReservasByUsuarioId(int id)
-        //{
-        //    var usuario = _usuarioService.GetUsuarioById(id);
-        //    List<Reserva> result = (List<Reserva>)usuario.Reservas;
-        //    return result;
-        //}
-
 
         [HttpGet("{id}")]
         public ActionResult<Usuario> GetUsuarioById(int id)

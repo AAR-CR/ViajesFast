@@ -47,5 +47,23 @@ namespace API_Vuelos.Controllers
 
             return CreatedAtAction(nameof(GetReservaById), new { id = addedReserva.Id }, addedReserva);
         }
+
+        [HttpGet("usuario/{usuarioId}")]
+        public ActionResult<List<Reserva>> GetReservasByUsuarioId(int usuarioId) 
+        {
+            var reservas =_reservaService.GetReservasByUsuarioId((int)usuarioId);
+            if(reservas == null || reservas.Count==0)
+            {
+                return NotFound("No se encontraron reservas para el usuario especificado.");
+            }
+            return reservas;
+        }
     }
 }
+
+
+
+
+
+
+

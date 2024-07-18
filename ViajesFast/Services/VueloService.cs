@@ -1,4 +1,5 @@
 ﻿
+using System.Net;
 using ViajesFast.Models;
 
 namespace ViajesFast.Services
@@ -131,6 +132,24 @@ namespace ViajesFast.Services
                 throw new HttpRequestException($"Error al crear la reserva: {response.StatusCode}, Detalles: {errorContent}");
             }
             return await response.Content.ReadFromJsonAsync<Reserva>();
+        }
+
+        public async Task<List<Reserva>> GetReservasByUsuarioIdAsync(int usuarioId)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"api/reservas/usuario/{usuarioId}");
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return new List<Reserva>(); 
+                }
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadFromJsonAsync<List<Reserva>>();
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new HttpRequestException($"Error al obtener las reservas: {ex.StatusCode}, Detalles: {ex.Message}");
+            }
         }
     }
 

@@ -42,5 +42,11 @@ namespace API_Vuelos.Services
             _context.SaveChanges();
             return reserva;
         }
+
+        public List<Reserva> GetReservasByUsuarioId(int usuarioId)
+        {
+            return _context.Reservas.Where(r => r.UsuarioId == usuarioId).ToList();
+
+        }
     }
 }

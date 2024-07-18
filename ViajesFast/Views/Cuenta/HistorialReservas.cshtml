@@ -1,0 +1,41 @@
+﻿@model List<ViajesFast.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Historial de Reservas";
+}
+
+<h2 class="text-center bloque text-white">Historial de Reservas</h2>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info" role="alert">
+        @ViewBag.Message
+    </div>
+}
+
+@if (Model == null || Model.Count == 0)
+{
+    <p class="text-center">No tienes reservas.</p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="text-dark">
+                <tr>
+                    <th>Vuelo</th>
+                    <th>Fecha de Reserva</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reserva in Model)
+                {
+                    <tr>
+                        <td>@reserva.VueloId</td>
+                        <td>@reserva.FechaReserva.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

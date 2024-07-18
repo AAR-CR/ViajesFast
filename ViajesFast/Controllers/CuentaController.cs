@@ -16,10 +16,14 @@ namespace ViajesFast.Controllers
     {
         private readonly ViajesFastDbConext _context;
         private readonly UsuarioService _usuarioService;
-        public CuentaController(ViajesFastDbConext context, UsuarioService usuarioService)
+        private readonly ReservaService _reservaService;
+        private readonly VueloService _VueloService;
+        public CuentaController(ViajesFastDbConext context, UsuarioService usuarioService, ReservaService reservaService, VueloService vueloService)
         {
             _context = context;
             _usuarioService = usuarioService;
+            _reservaService = reservaService;   
+            _VueloService = vueloService;
 
         }
 
@@ -199,8 +203,14 @@ namespace ViajesFast.Controllers
                     return NotFound("Usuario no encontrado");
                 }
 
-                //var reservas = await _usuarioService.GetReservasByUsuarioIdAsync(usuario.Id);
-                return View();
+                var reservas = await _reservaService.GetReservasByUsuarioIdAsync(usuario.Id);
+                if (reservas == null || reservas.Count == 0)
+                {
+                    ViewBag.Message = "No tienes reservas.";
+                    return View(new List<Reserva>());
+                }
+
+                return View(reservas);
             }
             catch (HttpRequestException ex)
             {

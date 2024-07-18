@@ -43,6 +43,8 @@ builder.Services.AddHttpClient<ReservaService>(client =>
     client.BaseAddress = new Uri("https://localhost:7223/");
 });
 
+// Registrar EmailService
+builder.Services.AddSingleton<EmailService>();
 
 // Configurar Entity Framework
 builder.Services.AddDbContext<ViajesFastDbConext>(options =>
