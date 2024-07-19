@@ -13,7 +13,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = "/Cuenta/Login";
         options.LogoutPath = "/Cuenta/Logout";
         options.AccessDeniedPath = "/Account/AccessDenied";
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Opcional: Configura el tiempo de expiración de la cookie
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Opcional: Configurar el tiempo de expiración de la cookie
         options.SlidingExpiration = true;
     });
 

@@ -3,6 +3,7 @@ using ViajesFast.Models;
 
 namespace ViajesFast.Data
 {
+                                                 //CONTEXTO BASE DE DATOS OPCIONAL
     public class ViajesFastDbConext :DbContext 
     {
         public DbSet<Usuario> Usuarios { get; set; }

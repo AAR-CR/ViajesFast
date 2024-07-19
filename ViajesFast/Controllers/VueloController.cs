@@ -11,7 +11,7 @@ using ViajesFast.Services;
 
 
 namespace ViajesFast.Controllers
-{
+{                                                //MANEJO DE VUELOS
     public class VueloController : Controller
     {
         private static List<Vuelo> _carrito = new List<Vuelo>();
@@ -33,7 +33,7 @@ namespace ViajesFast.Controllers
 
 
         [Authorize]
-        public IActionResult Cart(Vuelo vuelo)
+        public IActionResult Cart(Vuelo vuelo)         //CARRITO DE COMPRAS
         {
             if (vuelo != null && !String.IsNullOrEmpty(vuelo.Destino))
             {
@@ -47,7 +47,7 @@ namespace ViajesFast.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Checkout()
+        public async Task<IActionResult> Checkout()      //CONFIRMACIÓN DE RESERVAS
         {
             var userId = User.GetUserId();
             var id = int.Parse(userId);

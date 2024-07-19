@@ -3,6 +3,7 @@ using System.Security.Claims;
 
 namespace ViajesFast.Extensions
 {
+                                             //METODOS DE SESION
     public static class SessionExtensions
     {
         public static void Set<T>(this ISession session, string key, T value)

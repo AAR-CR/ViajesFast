@@ -18,6 +18,7 @@ namespace ViajesFast.Controllers
         private readonly UsuarioService _usuarioService;
         private readonly ReservaService _reservaService;
         private readonly VueloService _VueloService;
+
         public CuentaController(ViajesFastDbConext context, UsuarioService usuarioService, ReservaService reservaService, VueloService vueloService)
         {
             _context = context;
@@ -170,16 +171,12 @@ namespace ViajesFast.Controllers
                 try
                 {
                     var updatedUsuario = await _usuarioService.UpdateUsuarioAsync(usuario);
-                    //if (updatedUsuario == null)
-                    //{
-                    //    ViewBag.ErrorMessage = "La actualización del usuario no devolvió una respuesta válida.";
-                    //    return View("Error");
-                    //}
+                    
                     TempData["SuccessMessage"] = "Perfil actualizado exitosamente.";
                 }
                 catch (HttpRequestException ex)
                 {
-                    // Manejar el error adecuadamente
+
                     ViewBag.ErrorMessage = $"Error al actualizar el usuario: {ex.Message}";
                     return View("Error");
                 }

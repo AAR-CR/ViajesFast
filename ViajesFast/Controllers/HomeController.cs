@@ -6,7 +6,7 @@ using ViajesFast.Models;
 using ViajesFast.Services;
 
 namespace ViajesFast.Controllers
-{
+{                                                //ENTRADA A LA PÁGINA CON DATOS DE FINES ILUSTRATIVOS
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

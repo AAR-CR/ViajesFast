@@ -58,6 +58,13 @@ namespace ViajesFast.Controllers
 
                 var flightOffersResponse = JsonConvert.DeserializeObject<FlightOffersResponse>(flightOffersJson);
 
+                string originAirport = GetAirportName(origin);
+                string destinationAirport = GetAirportName(destination);
+
+                // Pasar nombres de aeropuertos a la vista
+                ViewBag.Origin = originAirport;
+                ViewBag.Destiny = destinationAirport;
+
                 return View(flightOffersResponse.Data); // Pasar la lista de FlightOffer a la vista
             }
             catch (HttpRequestException ex)
@@ -72,6 +79,12 @@ namespace ViajesFast.Controllers
                 return View(new List<FlightOffer>());
             }
 
+        }
+
+        private string GetAirportName(string code)
+        {
+            var airport = _airports.FirstOrDefault(a => a.Value == code).Key;
+            return !string.IsNullOrEmpty(airport) ? airport : "Código no encontrado";
         }
 
         [HttpPost]

@@ -3,6 +3,7 @@ using System.Text;
 
 namespace ViajesFast.Encript
 {
+                                              //ALGORITMO DE ENCRIPTACIÓN
     public class Encriptar
     {
         public static string GetSHA256(string str)

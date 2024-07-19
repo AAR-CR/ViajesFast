@@ -54,6 +54,20 @@
 </div>
 
 <hr />
+
+@if (!string.IsNullOrEmpty(ViewBag.Origin))
+{
+    <div class="custom-alert" role="alert">
+        <span>
+            <span class="alert-heading">SALIDA: </span><p>@ViewBag.Origin</p>
+        </span>
+        <span>
+            <span class="alert-heading">DESTINO: </span><p>@ViewBag.Destiny</p>
+        </span>
+        <a href="@Url.Action("Index", "Amadeus")" class="btn btn-primary">Limpiar</a>
+    </div>
+}
+
 <div class="container mt-4">
     @if (Model != null && Model.Count > 0)
     {

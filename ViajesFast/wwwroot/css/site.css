@@ -60,12 +60,12 @@ body {
 }
 
 .container {
-    max-width: 80%; /* Ajusta el ancho máximo del contenedor */
+    max-width: 80%; /* Ajuste de ancho máximo del contenedor */
 }
 
 .table-responsive {
-    max-height: 460px; /* Ajusta la altura máxima del contenedor de la tabla */
-    overflow-y: auto; /* Añade desplazamiento vertical si es necesario */
+    max-height: 460px; /* Ajuste de altura máxima del contenedor de la tabla */
+    overflow-y: auto; /* Desplazamiento vertical si es necesario */
 }
 
 .bloque {
@@ -74,6 +74,14 @@ body {
     padding:20px;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius:10px;
+}
+
+.bloque2 {
+    max-width: 600px;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
 }
 
 .text-warning{
@@ -101,3 +109,30 @@ body {
 hr {
     border-top: 1px solid rgba(0, 0, 0, 0.1); /* Línea divisoria suave */
 }
+
+
+.custom-alert {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8em; /* Texto pequeño */
+}
+
+    .custom-alert .alert-heading {
+        margin: 0 10px 0 0;
+        font-size: 1em;
+    }
+
+    .custom-alert p {
+        margin: 0 10px 0 0;
+    }
+
+    .custom-alert .btn {
+        margin-left: auto; /* Para alinear el botón a la derecha */
+        padding: 5px 10px; /* Tamaño del botón reducido */
+        font-size: 0.8em; /* Texto pequeño */
+    }

@@ -7,5 +7,5 @@ document.addEventListener("DOMContentLoaded", function () {
             const firstRow = table.rows[0];
             table.appendChild(firstRow);
         }
-    }, 2000); // Tiempo rotacion
+    }, 2000); // Tiempo rotacion y efecto de tabla de datos ficticios
 });

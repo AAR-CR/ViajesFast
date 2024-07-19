@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace ViajesFast.Services
 {
+                                             //MANEJO DE SERVICIO DE API AMADEUS
     public class AmadeusService
     {
         private static readonly string clientId = "GpmyixUWBv4Z2ySYMPUsqyXWGJrGoQFH";

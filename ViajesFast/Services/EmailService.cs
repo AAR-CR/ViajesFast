@@ -4,6 +4,7 @@ using MimeKit;
 
 namespace ViajesFast.Services
 {
+                                                  //SERVICIO DE ENVIO DE CORREO
     public class EmailService
     {
         private readonly IConfiguration _configuration;
