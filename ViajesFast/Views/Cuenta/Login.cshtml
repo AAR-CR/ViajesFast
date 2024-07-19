@@ -1,7 +1,12 @@
 ﻿
 @model ViajesFast.Models.Usuario
 
-
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
 
 <form asp-action="Login" method="post" class="bloque mx-auto">
     <div class="form-horizontal">

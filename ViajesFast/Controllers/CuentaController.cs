@@ -88,6 +88,7 @@ namespace ViajesFast.Controllers
                     return View("Error");
                 }
             }
+            TempData["SuccessMessage"] = "Usuario creado exitosamente. Ingresa acá:";
             return RedirectToAction("Login");
         }
 
